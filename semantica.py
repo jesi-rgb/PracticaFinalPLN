@@ -83,6 +83,7 @@ def desambiguar(input_text):
         for token in tokens:
             if token.lower() not in eng_stopwords:
                 synset = lesk(sentence, token)
+                print(sentence, synset)
                 if synset:
                     synsets_dict[token] = synset
 

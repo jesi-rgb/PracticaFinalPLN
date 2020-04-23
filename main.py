@@ -7,7 +7,7 @@ from semantica import desambiguar, sinonimos, antonimos
 
 def desambiguacion():
     st.subheader("Análisis semántico")
-    input_method = st.radio('Elige método', ['Escribir texto', 'Subir un archivo'])
+    input_method = st.radio('Elige un método', ['Escribir texto', 'Subir un archivo'])
     message = ''
     synsets = None
 
@@ -24,21 +24,23 @@ def desambiguacion():
 
     if synsets:
         option = st.selectbox("Elige una palabra a desambiguar:", [x for x in sorted(synsets.keys())])
-        st.write(synsets[option].lemma_names())
+        st.markdown("**"+synsets[option].name()+"**: "+synsets[option].definition())
 
         if len(synsets[option].examples()) > 0:
             st.write("Un ejemplo de uso: _{}_".format(synsets[option].examples()[0]))
 
+    st.markdown("***")
+
     if st.checkbox('Sinónimos'):
         st.markdown('''
-        ##### Aquí se muestra el texto introducido, pero las palabras han sido sustituidas por los sinónimos que ha encontrado el sistema. La palabra <span style=color:red> _original luce así_</span>, y su <span style=color:blue> **sustituta, así** </span>.
+        ##### Aquí se muestra el texto introducido, pero las palabras han sido sustituidas por los sinónimos que ha encontrado el sistema. La palabra <span style=color:red> _original luce así_</span> y su <span style=color:blue> **sustituta, así** </span>.
         #####''', unsafe_allow_html=True)
         output_text = sinonimos(message)
         st.markdown(output_text, unsafe_allow_html=True)
     
     if st.checkbox('Antónimos'):
         st.markdown('''
-        ##### Aquí se muestra el texto introducido, pero las palabras han sido sustituidas por los antónimos que ha encontrado el sistema. La palabra <span style=color:red> _original luce así_</span>, y su <span style=color:blue> **sustituta, así** </span>.
+        ##### Aquí se muestra el texto introducido, pero las palabras han sido sustituidas por los antónimos que ha encontrado el sistema. La palabra <span style=color:red> _original luce así_</span> y su <span style=color:blue> **sustituta, así** </span>.
         #####''', unsafe_allow_html=True)
         output_text = antonimos(message)
         st.markdown(output_text, unsafe_allow_html=True)
@@ -57,9 +59,9 @@ def main():
     st.title("Procesamiento del lenguaje Natural")
     st.subheader("Aplicación web para analizar texto de varias maneras")
 
-    
+    st.markdown("***")
     option = st.radio("Elige el modo de análisis", ['Análisis semántico' ,'Análisis morfológico', 'Reconocedor de entidades'])
-
+    st.markdown("***")
     if option == 'Análisis semántico':
         desambiguacion()
     elif option == 'Análisis morfológico':
