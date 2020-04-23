@@ -2,3 +2,7 @@ __pycache__
 codigo del bro
 .DS*
 .DS_Store
+__pycache__/*
+codigo del bro/*
+.vscode
+codigo del bro/prueba.py
