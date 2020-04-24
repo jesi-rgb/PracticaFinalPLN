@@ -3,7 +3,7 @@
 # practicaFinal/entidades.py: 2,3,4
 # practicaFinal/morfologico.py: 2,3,4
 # practicaFinal/semantica.py: 1,2,3,4,5,6
-nltk == 3.4.4
+nltk == 3.4.5
 
 # practicaFinal/main.py: 2
 pandas == 0.24.2
