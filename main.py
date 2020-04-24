@@ -3,9 +3,8 @@ import pandas as pd
 import numpy as np
 from semantica import desambiguar, sinonimos, antonimos
 from morfologico import morph_analysis
+from entidades import named_entity_recognition
 import pandas as pd
-
-
 
 def desambiguacion():
     st.subheader("Análisis semántico")
@@ -65,7 +64,6 @@ def desambiguacion():
             output_text = antonimos(message, name_regex, adj_regex, vrb_regex, adv_regex)
             st.markdown(output_text, unsafe_allow_html=True)
 
-    
 
 def morfologico():
     st.subheader("Análisis morfológico")
@@ -113,6 +111,20 @@ def morfologico():
 
 def entities():
     st.subheader("Reconocimiento de entidades")
+    input_method = st.radio('Elige un método', ['Escribir texto', 'Subir un archivo'])
+    data = None
+    message = None
+
+    if input_method == 'Escribir texto':
+        message = st.text_area("Introduce texto (en inglés) a analizar...")
+        data = named_entity_recognition(message)
+    else:
+        input_file = st.file_uploader("... o arrastra aquí un fichero", encoding='auto', type=["csv", "txt"])
+    
+        if input_file is not None:
+            message = input_file.read()
+            data = named_entity_recognition(message)
+
 
 def main():
 	# Title
