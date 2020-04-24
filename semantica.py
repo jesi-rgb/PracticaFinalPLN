@@ -11,7 +11,6 @@ import random
 regex = r"\w+\'\w+|\w+"
 tokenizer = RegexpTokenizer(regex)
 eng_stopwords = set(stopwords.words('english'))
-regexes_dict = {'N\w{1,3}':'nombres', 'J\w{1,2}':'adjetivos', 'V\w{1,2}':'verbos', 'RB?':'adverbios'}
 
 
 POS_TAGGER = 'taggers/maxent_treebank_pos_tagger/english.pickle'
@@ -110,16 +109,15 @@ def sinonimos(input_text, name_regex, adj_regex, vrb_regex, adv_regex):
 def desambiguar(input_text):
     sentences = sent_tokenize(input_text)
 
-    synsets_dict= dict()
+    
+
+    synsets_list = dict()
     for sentence in sentences:
         tokens = tokenizer.tokenize(sentence)
         
         for token in tokens:
             if token.lower() not in eng_stopwords:
-                synset = lesk(sentence, token)
-                # print(sentence, synset)
-                if synset:
-                    synsets_dict[token] = synset
+                synsets_list[token] = wn.synsets(token)
 
-    return synsets_dict
+    return synsets_list
 

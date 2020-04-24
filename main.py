@@ -22,16 +22,22 @@ def desambiguacion():
             synsets = desambiguar(message)
 
 
+
     if synsets:
         option = st.selectbox("Elige una palabra a desambiguar:", [x for x in sorted(synsets.keys())])
-        st.markdown("**"+synsets[option].name()+"**: "+synsets[option].definition())
 
-        if len(synsets[option].examples()) > 0:
-            st.write("Un ejemplo de uso: _{}_".format(synsets[option].examples()[0]))
+        for syn in synsets[option]:
+            st.markdown("### **"+syn.name()+"**: "+syn.definition())
 
-    st.markdown("***")
+            if len(syn.examples()) > 0:
+                st.markdown("###### Ejemplo: _{}_".format(syn.examples()[0]))
 
-    if st.checkbox('Sinónimos'):
+            st.markdown("***")
+
+
+    option_highlight = st.radio('', ['Sinónimos', 'Antónimos'])
+
+    if option_highlight == 'Sinónimos':
         st.markdown('''
         ##### Aquí se muestra el texto introducido, pero las palabras han sido sustituidas por los sinónimos que ha encontrado el sistema. La palabra <span style=color:red> _original luce así_</span> y su <span style=color:blue> **sustituta, así**</span>.
         #####''', unsafe_allow_html=True)
@@ -43,12 +49,12 @@ def desambiguacion():
         output_text = sinonimos(message, name_regex, adj_regex, vrb_regex, adv_regex)
         st.markdown(output_text, unsafe_allow_html=True)
     
-    st.markdown("***")
-    if st.checkbox('Antónimos'):
+
+    if option_highlight == 'Antónimos':
         st.markdown('''
         ##### Aquí se muestra el texto introducido, pero las palabras han sido sustituidas por los antónimos que ha encontrado el sistema. La palabra <span style=color:red> _original luce así_</span> y su <span style=color:blue> **sustituta, así**</span>.
         #####''', unsafe_allow_html=True)
-        name_regex = st.checkbox('Nombres')
+        name_regex = st.checkbox("Nombres")
         adj_regex = st.checkbox("Adjetivos")
         vrb_regex = st.checkbox("Verbos")
         adv_regex = st.checkbox("Adverbios")
@@ -58,7 +64,6 @@ def desambiguacion():
     
 
 def morfologico():
-    # st.markdown('Some _Markdown_ text with <span style="background-color:blue;color:white">some **blue** text</span>.', unsafe_allow_html=True)
     st.subheader("Análisis morfológico")
 
 def entities():
@@ -67,11 +72,11 @@ def entities():
 def main():
 	# Title
     st.title("Procesamiento del lenguaje Natural")
-    st.subheader("Aplicación web para analizar texto de varias maneras")
+    st.header("Aplicación web para analizar texto de varias maneras")
 
-    st.markdown("***")
-    option = st.radio("Elige el modo de análisis", ['Análisis semántico' ,'Análisis morfológico', 'Reconocedor de entidades'])
-    st.markdown("***")
+    
+    option = st.sidebar.radio("Elige el modo de análisis", ['Análisis semántico' ,'Análisis morfológico', 'Reconocedor de entidades'])
+  
     if option == 'Análisis semántico':
         desambiguacion()
     elif option == 'Análisis morfológico':
