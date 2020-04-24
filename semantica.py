@@ -8,10 +8,9 @@ from nltk.corpus import stopwords
 import re
 import random
 
-regex = r"/[a-z]+\'[a-z]+|[a-z]+|[A-Z]+\'[A-Z]+|[A-Z]+/g"
+regex = r"[A-Z]+[a-z]+|[a-z]+\'[a-z]+|[a-z]+|[A-Z]+\'[A-Z]+|[A-Z]+"
 tokenizer = RegexpTokenizer(regex)
 eng_stopwords = set(stopwords.words('english'))
-
 
 POS_TAGGER = 'taggers/maxent_treebank_pos_tagger/english.pickle'
 tagger = load(POS_TAGGER)
