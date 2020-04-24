@@ -24,10 +24,10 @@ def desambiguacion():
 
 
     if synsets:
-        option = st.selectbox("Elige una palabra a desambiguar:", [x for x in sorted(synsets.keys())])
+        option = st.selectbox("Clica y teclea una palabra para ver sus definiciones:", [x for x in sorted(synsets.keys())])
 
         for syn in synsets[option]:
-            st.markdown("### **"+syn.name()+"**: "+syn.definition())
+            st.write("**"+syn.name()+"**: "+syn.definition())
 
             if len(syn.examples()) > 0:
                 st.markdown("###### Ejemplo: _{}_".format(syn.examples()[0]))

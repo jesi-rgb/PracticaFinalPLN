@@ -8,7 +8,7 @@ from nltk.corpus import stopwords
 import re
 import random
 
-regex = r"\w+\'\w+|\w+"
+regex = r"/[a-z]+\'[a-z]+|[a-z]+|[A-Z]+\'[A-Z]+|[A-Z]+/g"
 tokenizer = RegexpTokenizer(regex)
 eng_stopwords = set(stopwords.words('english'))
 
@@ -108,8 +108,6 @@ def sinonimos(input_text, name_regex, adj_regex, vrb_regex, adv_regex):
 
 def desambiguar(input_text):
     sentences = sent_tokenize(input_text)
-
-    
 
     synsets_list = dict()
     for sentence in sentences:
