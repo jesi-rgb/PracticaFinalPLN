@@ -33,16 +33,26 @@ def desambiguacion():
 
     if st.checkbox('Sinónimos'):
         st.markdown('''
-        ##### Aquí se muestra el texto introducido, pero las palabras han sido sustituidas por los sinónimos que ha encontrado el sistema. La palabra <span style=color:red> _original luce así_</span> y su <span style=color:blue> **sustituta, así** </span>.
+        ##### Aquí se muestra el texto introducido, pero las palabras han sido sustituidas por los sinónimos que ha encontrado el sistema. La palabra <span style=color:red> _original luce así_</span> y su <span style=color:blue> **sustituta, así**</span>.
         #####''', unsafe_allow_html=True)
-        output_text = sinonimos(message)
+
+        name_regex = st.checkbox('Nombres')
+        adj_regex = st.checkbox("Adjetivos")
+        vrb_regex = st.checkbox("Verbos")
+        adv_regex = st.checkbox("Adverbios")
+        output_text = sinonimos(message, name_regex, adj_regex, vrb_regex, adv_regex)
         st.markdown(output_text, unsafe_allow_html=True)
     
+    st.markdown("***")
     if st.checkbox('Antónimos'):
         st.markdown('''
-        ##### Aquí se muestra el texto introducido, pero las palabras han sido sustituidas por los antónimos que ha encontrado el sistema. La palabra <span style=color:red> _original luce así_</span> y su <span style=color:blue> **sustituta, así** </span>.
+        ##### Aquí se muestra el texto introducido, pero las palabras han sido sustituidas por los antónimos que ha encontrado el sistema. La palabra <span style=color:red> _original luce así_</span> y su <span style=color:blue> **sustituta, así**</span>.
         #####''', unsafe_allow_html=True)
-        output_text = antonimos(message)
+        name_regex = st.checkbox('Nombres')
+        adj_regex = st.checkbox("Adjetivos")
+        vrb_regex = st.checkbox("Verbos")
+        adv_regex = st.checkbox("Adverbios")
+        output_text = antonimos(message, name_regex, adj_regex, vrb_regex, adv_regex)
         st.markdown(output_text, unsafe_allow_html=True)
 
     
