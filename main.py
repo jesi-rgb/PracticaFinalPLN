@@ -1,10 +1,8 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
 from semantica import desambiguar, sinonimos, antonimos
 from morfologico import morph_analysis
 from entidades import named_entity_recognition
-import pandas as pd
 
 def desambiguacion():
     st.subheader("Análisis semántico")
@@ -64,7 +62,6 @@ def desambiguacion():
             output_text = antonimos(message, name_regex, adj_regex, vrb_regex, adv_regex)
             st.markdown(output_text, unsafe_allow_html=True)
 
-
 def morfologico():
     st.subheader("Análisis morfológico")
     input_method = st.radio('Elige un método', ['Escribir texto', 'Subir un archivo'])
@@ -107,8 +104,6 @@ def morfologico():
         st.write("Y aquí tenemos una distribución de las categorías de las palabras:")
         st.bar_chart(pd.DataFrame.from_dict(data[3], orient='index'), height=600)
 
-
-
 def entities():
     st.subheader("Reconocimiento de entidades")
     input_method = st.radio('Elige un método', ['Escribir texto', 'Subir un archivo'])
@@ -127,7 +122,6 @@ def entities():
 
     if data:
         st.markdown(data, unsafe_allow_html=True)
-
 
 def main():
 	# Title
@@ -148,9 +142,6 @@ def main():
     st.sidebar.subheader("About")
     st.sidebar.text("Práctica final de PLN")
     st.sidebar.info("Jesús Enrique Cartas Rascón")
-
-
-
 
 
 if __name__ == "__main__":
