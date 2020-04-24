@@ -125,6 +125,9 @@ def entities():
             message = input_file.read()
             data = named_entity_recognition(message)
 
+    if data:
+        st.markdown(data, unsafe_allow_html=True)
+
 
 def main():
 	# Title
