@@ -13,4 +13,4 @@ pandas == 0.24.2
 spacy == 2.2.3
 
 # practicaFinal/main.py: 1
-streamlit == 0.57.3
+streamlit == 1.37.0
